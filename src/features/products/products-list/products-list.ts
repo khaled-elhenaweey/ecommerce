@@ -17,6 +17,7 @@ export class ProductsList {
 
   products: Product[] = [];
   isLoading = true;
+  errorMessage: string | null = null;
 
   ngOnInit() {
     this.subscription = this.productsService.getProducts().subscribe({
@@ -25,8 +26,8 @@ export class ProductsList {
         this.isLoading = false;
       },
       error: (error) => {
-        console.error('Error fetching products:', error);
         this.isLoading = false;
+        this.errorMessage = 'Failed to fetch products.';
       },
     });
   }
