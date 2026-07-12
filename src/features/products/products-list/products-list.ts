@@ -4,10 +4,10 @@ import { Subscription } from 'rxjs';
 import { Product } from '../models/product';
 import { Card } from '../../../shared/card/card';
 import { Button } from '../../../shared/button/button';
-
+import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-products-list',
-  imports: [Button, Card],
+  imports: [Button, Card, RouterLink],
   templateUrl: './products-list.html',
   styleUrl: './products-list.css',
 })

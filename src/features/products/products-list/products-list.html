@@ -22,14 +22,16 @@
   }@else {
   <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
     @for (product of products; track product.id) {
-    <app-card>
-      <h3 card-header class="font-bold text-lg">{{ product.title}}</h3>
-      <p card-body class="text-gray-600 text-sm line-clamp-2">{{ product.description }}</p>
-      <div card-footer class="flex justify-between items-center">
-        <span class="font-bold text-blue-600">${{ product.price }}</span>
-        <app-button variant="primary">Add to Cart</app-button>
-      </div>
-    </app-card>
+    <a [routerLink]="['/product',product.id]" class="block ">
+      <app-card>
+        <h3 card-header class="font-bold text-lg">{{ product.title}}</h3>
+        <p card-body class="text-gray-600 text-sm line-clamp-2">{{ product.description }}</p>
+        <div card-footer class="flex justify-between items-center">
+          <span class="font-bold text-blue-600">${{ product.price }}</span>
+          <app-button variant="primary">Add to Cart</app-button>
+        </div>
+      </app-card>
+    </a>
     }
   </div>
   }
