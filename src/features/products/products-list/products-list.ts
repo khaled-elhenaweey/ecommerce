@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { Products } from '../services/products';
 import { Subscription } from 'rxjs';
-import { Product } from '../models/product';
+import { Category, Product } from '../models/product';
 import { Card } from '../../../shared/card/card';
 import { Button } from '../../../shared/button/button';
 import { RouterLink } from '@angular/router';
@@ -18,10 +18,33 @@ export class ProductsList {
   private subscription?: Subscription;
 
   products: Product[] = [];
+  categories: Category[] = [];
+  selectedCategory: string = '';
+  private categoriesSubscription?: Subscription;
   isLoading = true;
   errorMessage: string | null = null;
 
   ngOnInit() {
+    this.loadProducts();
+    this.categoriesSubscription = this.productsService.getCategories().subscribe({
+      next: (categories) => {
+        this.categories = categories;
+        console.log(this.categories);
+      },
+      error: (error) => {
+        console.error('Failed to fetch categories:', error);
+      },
+    });
+  }
+  goToProductDetails(id: number): void {
+    this.router.navigate(['/product', id]);
+  }
+  onAddToCartClick(event: Event): void {
+    event.stopPropagation();
+    console.log('Add to cart clicked');
+  }
+  private loadProducts(): void {
+    this.isLoading = true;
     this.subscription = this.productsService.getProducts().subscribe({
       next: (response) => {
         this.products = response.products;
@@ -33,14 +56,8 @@ export class ProductsList {
       },
     });
   }
-  goToProductDetails(id: number): void {
-    this.router.navigate(['/product', id]);
-  }
-  onAddToCartClick(event: Event): void {
-    event.stopPropagation();
-    console.log('Add to cart clicked');
-  }
   ngOnDestroy(): void {
     this.subscription?.unsubscribe();
+    this.categoriesSubscription?.unsubscribe();
   }
 }
