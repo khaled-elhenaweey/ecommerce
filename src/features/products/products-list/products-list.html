@@ -1,4 +1,18 @@
 <div class="p-6">
+  <div class="mb-4 max-w-xs">
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>filter by category</mat-label>
+      <mat-select [(ngModel)]="selectedCategory" (selectionChange)="onCategoryChange()">
+
+        <mat-option [value]="">All Categories</mat-option>
+        @for (category of categories; track category.slug) {
+        <mat-option [value]="category.slug">{{ category.name }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+  </div>
+</div>
+<div class="p-6">
   @if (isLoading) {
   <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
     @for (item of [1,2,3,4,5,6]; track item) {
