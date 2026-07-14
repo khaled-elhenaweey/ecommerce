@@ -1,0 +1,27 @@
+<div class="min-h-[70vh] flex items-center justify-center p-6">
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="bg-white p-8 rounded-lg shadow-md w-full max-w-sm">
+    <h2 class="text-xl font-bold mb-6 ">Login to ShopSphere</h2>
+    <mat-form-field appearance="outline" class="w-full mb-2">
+      <mat-label>user name</mat-label>
+      <input matInput formControlName="username" />
+      @if (loginForm.get('username')?.touched && loginForm.get('username')?.hasError('required')) {
+      <mat-error> Username is required</mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="w-full mb-2">
+      <mat-label>password</mat-label>
+      <input matInput formControlName="password" />
+      @if (loginForm.get('password')?.touched && loginForm.get('password')?.hasError('minlength')) {
+      <mat-error> Password must be at least 6 characters</mat-error>
+      }
+    </mat-form-field>
+
+    @if (errorMessage) {
+    <p class="text-red-600 text-sm mb-4">{{errorMessage}}</p>
+    }
+    <button type="submit" [disabled]="isSubmitting"
+      class="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 disabled:opacity-50">
+      {{isSubmitting ? 'loggin in...': 'login'}}
+    </button>
+  </form>
+</div>
