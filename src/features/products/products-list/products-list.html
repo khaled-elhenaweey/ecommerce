@@ -1,26 +1,22 @@
-<div class="p-6">
-  <div class="mb-4 max-w-xs">
-    <mat-form-field appearance="outline" class="w-full">
-      <mat-label>filter by category</mat-label>
-      <mat-select [(ngModel)]="selectedCategory" (selectionChange)="onCategoryChange()">
+<div class="p-6 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
+  <mat-form-field appearance="outline" class="w-full">
+    <mat-label>filter by category</mat-label>
+    <mat-select [(ngModel)]="selectedCategory" (selectionChange)="onCategoryChange()">
 
-        <mat-option [value]="">All Categories</mat-option>
-        @for (category of categories; track category.slug) {
-        <mat-option [value]="category.slug">{{ category.name }}</mat-option>
-        }
-      </mat-select>
-    </mat-form-field>
-  </div>
-  <div class="mb-4 max-w-xs">
-    <mat-form-field appearance="outline" class="w-full">
-      <mat-label>search products</mat-label>
-      <input matInput [(ngModel)]="searchTerm" (ngModelChange)="onSearchInput($event)">
-    </mat-form-field>
-  </div>
+      <mat-option [value]="">All Categories</mat-option>
+      @for (category of categories; track category.slug) {
+      <mat-option [value]="category.slug">{{ category.name }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="w-full">
+    <mat-label>search products</mat-label>
+    <input matInput [(ngModel)]="searchTerm" (ngModelChange)="onSearchInput($event)">
+  </mat-form-field>
 </div>
 <div class="p-6">
   @if (isLoading) {
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
     @for (item of [1,2,3,4,5,6]; track item) {
     <div class="bg-white rounded-lg shadow-md overflow-hidden animate-pulse">
       <div class="p-4 border-b border-gray-100">
@@ -40,7 +36,7 @@
   }@else if (errorMessage) {
   <p class="bg-red-50 border border-red-200 text-red-700 rounded-md p-4">{{ errorMessage }}</p>
   }@else {
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+  <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
     @for (product of products; track product.id) {
     <div (click)="goToProductDetails(product.id)" class="block ">
       <app-card>
