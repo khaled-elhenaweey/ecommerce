@@ -22,4 +22,7 @@ export class Products {
   getProductsByCategory(category: string): Observable<ProductsResponse> {
     return this.http.get<ProductsResponse>(`${this.baseUrl}/category/${category}`);
   }
+  searchProducts(query: string): Observable<ProductsResponse> {
+    return this.http.get<ProductsResponse>(`${this.baseUrl}/search?q=${query}`);
+  }
 }

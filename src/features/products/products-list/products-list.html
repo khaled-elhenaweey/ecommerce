@@ -11,6 +11,12 @@
       </mat-select>
     </mat-form-field>
   </div>
+  <div class="mb-4 max-w-xs">
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>search products</mat-label>
+      <input matInput [(ngModel)]="searchTerm" (ngModelChange)="onSearchInput($event)">
+    </mat-form-field>
+  </div>
 </div>
 <div class="p-6">
   @if (isLoading) {
